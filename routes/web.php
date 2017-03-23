@@ -13,7 +13,7 @@
 
 $app->get('/', function () use ($app) {
 
-    return App\State::first()->townships()->get();
+    return App\Township::first()->towns()->get();
 
 });
 $app->get('/api/states', "ApiController@states");
