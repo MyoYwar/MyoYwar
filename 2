@@ -2,8 +2,10 @@
 namespace App\Api\Tranformer;
 
 use App\State;
+use League\Resource\Collection;
 use App\Api\Tranformer\IncludeChild;
 use League\Fractal\TransformerAbstract;
+use App\Api\Tranformer\TownshipTranformer;
 
 class StateTranformer extends TransformerAbstract{ 
     use IncludeChild;

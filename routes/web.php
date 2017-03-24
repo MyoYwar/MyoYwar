@@ -17,3 +17,7 @@ $app->get('/', function () use ($app) {
 
 });
 $app->get('/api/states', "ApiController@states");
+$app->get('/api/districts', "ApiController@districts");
+$app->get('/api/townships', "ApiController@townships");
+$app->get('/api/towns', "ApiController@towns");
+//$app->get('/api/villagetracts', "ApiController@districts");

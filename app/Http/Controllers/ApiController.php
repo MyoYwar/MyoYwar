@@ -21,10 +21,15 @@ class ApiController extends Controller
     }
 
     public function states(Request $request){
+        $this->getInclude($request);
+        return $this->transform(State::all(), new StateTranformer);
+    }
+
+    private function getInclude($request){
         if($request->has("include")){
             $this->fractal->parseIncludes($request->include);
         }
-        return $this->transform(State::all(), new StateTranformer);
+
     }
 
 }

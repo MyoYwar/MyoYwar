@@ -1,19 +1,20 @@
 <?php
 namespace App\Api\Tranformer;
 
-use App\Township;
+use App\District;
 use App\Api\Tranformer\IncludeChild;
 use League\Fractal\TransformerAbstract;
 
-class TownshipTranformer extends TransformerAbstract{ 
+class DistrictTranformer extends TransformerAbstract{ 
     use IncludeChild;
     protected $availableIncludes = ['township', 'town' ];
 
-    public function transform(Township  $township)
+    public function transform(District  $district)
 	{
             return [
-                'id' => $township->id,
-                'name' => $township->name
+                'id' => $district->id,
+                'name' => $district->name
+
 	    ];
 	}
 
