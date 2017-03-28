@@ -10,7 +10,9 @@ class TownTranformer extends TransformerAbstract{
 	{
             return [
                 'id' => $town->id,
-                'name' => $town->name
+                'name' => $town->name,
+                'uni' => $town->unicode,
+                'zh' => $town->zawgyi,
 
 	    ];
 	}

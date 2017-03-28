@@ -2,23 +2,16 @@
 namespace App\Api\Tranformer;
 
 use App\State;
+use App\Api\Tranformer\Traform;
 use App\Api\Tranformer\IncludeChild;
 use League\Fractal\TransformerAbstract;
 
 class StateTranformer extends TransformerAbstract{ 
     use IncludeChild;
+    use Tranform;
 
     protected $availableIncludes = ['district', 'township', 'town' ];
 
-    public function transform(State  $state)
-	{
-            return [
-                'id' => $state->id,
-                'name' => $state->name
-	    ];
-    }
-
-    
 
 /*    public function includeTownship(State $state){*/
        //return $this->includeModel($state, 'township');

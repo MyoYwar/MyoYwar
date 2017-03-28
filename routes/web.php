@@ -13,11 +13,18 @@
 
 $app->get('/', function () use ($app) {
 
-    return App\Township::first()->towns()->get();
-
+    return view('index');
 });
+
+
+//$app->get('/test', "ApiController@states");
+
 $app->get('/api/states', "ApiController@states");
 $app->get('/api/districts', "ApiController@districts");
 $app->get('/api/townships', "ApiController@townships");
 $app->get('/api/towns', "ApiController@towns");
 //$app->get('/api/villagetracts', "ApiController@districts");
+//
+
+$app->get('/api/states/{name}' , "ApiController@state");
+$app->get('/api/towns/{name}' , "ApiController@town");
