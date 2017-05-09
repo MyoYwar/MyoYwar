@@ -43,8 +43,14 @@ class Handler extends ExceptionHandler
      * @param  \Exception  $e
      * @return \Illuminate\Http\Response
      */
-    public function render($request, Exception $e)
-    {
-        return parent::render($request, $e);
+    public function render($request, Exception $e){
+
+        switch($e){
+        case ( $e instanceof NotFoundHttpException):
+            return response()->json(["message" => "Resources not found"], 404); 
+            break;
+        default:
+            return parent::render($request, $e);
+        }
     }
 }
