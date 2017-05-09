@@ -64,7 +64,7 @@
              },
              mounted: function(){
                  data = "";
-                 axios.get('localhost/api/states?include=township')
+                 axios.get('api/states?include=township')
 
                      .then(function(response){
                          
