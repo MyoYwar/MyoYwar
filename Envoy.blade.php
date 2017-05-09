@@ -24,8 +24,6 @@ $release = 'release_' . date('YmdHis');
 @task('run_composer')
     cd {{ $release_dir }}/{{ $release }};
     composer install --prefer-dist --no-scripts;
-    php artisan clear-compiled --env=production;
-    php artisan optimize --env=production;
 @endtask
 
 @task('update_permissions')
