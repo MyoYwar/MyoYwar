@@ -43,6 +43,6 @@ $release = 'release_' . date('YmdHis');
     cd {{ $release_dir }}/{{ $release }}/storage;
     ln -nfs ../../../logs logs;
     chgrp -h www-data logs;
-
+    sudo service php7.0-fpm reload
 @endtask
 
