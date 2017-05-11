@@ -15,8 +15,6 @@ $app->get('/', function () use ($app) {
 
     return view('index');
 });
-$app->get('/test', 'Controller@redis');
-$app->get('/set', 'Controller@set');
 
 //$app->get('/test', "ApiController@states");
 

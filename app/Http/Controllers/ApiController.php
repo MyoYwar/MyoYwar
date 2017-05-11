@@ -3,7 +3,7 @@ namespace App\Http\Controllers;
 
 use App\State;
 use Illuminate\Http\Request;
-use App\Http\Controllers\ApiControllerTrait;
+use App\Http\Controllers\Traits\ApiControllerTrait;
 use Min\FractalCommands\Traits\Fractal;
 use App\Api\Tranformer\StateTranformer;
 

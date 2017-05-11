@@ -1,5 +1,5 @@
 <?php
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Traits;
 use Illuminate\Support\Facades\Redis;
 
 trait ApiControllerTrait{
