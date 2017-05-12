@@ -48,5 +48,14 @@ class DivisionController extends Controller
     // Viallage Tracts
     // Village
    
+    private function createItemTranformer($include, $class, $name){
+
+        $this->parseInclude($include);
+        $utf = urldecode($name);
+        $data = call_user_func(array($this->modelClass($class), 'where'), ['name' => $utf])->first();
+        // null must show error
+        return $this->transformItem($data, $this->tranformerClass($class));
+
+    }
 
    }

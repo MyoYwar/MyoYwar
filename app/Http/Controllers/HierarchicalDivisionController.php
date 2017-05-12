@@ -12,7 +12,7 @@ class HierarchicalDivisionController extends Controller
     use Fractal, ApiControllerTrait;
 
 
-   /**
+    /**
      * Create a new controller instance.
      *
      * @return void
@@ -22,17 +22,24 @@ class HierarchicalDivisionController extends Controller
         $this->loadFractal();
     }
 
-    public function districts(Request $request, $name){
-        return $this->sendResponse($this->createItemTranformer('district', 'State', $name));
+    public function districts(Request $request, $name, $division){
+        //$model = \App\State::where('name', $name)->first();
+        //$data = call_user_func([$model, $division])->get();
+        return $this->sendResponse($this->getTranformer($name, $division, 'State'));
     }
 
-    public function townships(Request $request, $name){
-        return $this->sendResponse($this->createItemTranformer('township', 'District', $name));
+    public function townships(Request $request, $name, $division){
+        return $this->sendResponse($this->getTranformer($name, $division, 'District'));
     }
 
-    public function towns(Request $request, $name){
-        return $this->sendResponse($this->createItemTranformer('town', 'Township', $name));
+    public function towns(Request $request, $name, $division){
+        return $this->sendResponse($this->getTranformer($name, $division, 'Township'));
     }
 
+    public function getTranformer($name, $divison, $class){
+        $model = call_user_func([$this->modelClass($class), 'where'], 'name', $name)->first();
+        $data = call_user_func([$model, $divison])->get();
+        return $this->transform($data, $this->tranformerClass($divison));
 
-     }
+    }
+}

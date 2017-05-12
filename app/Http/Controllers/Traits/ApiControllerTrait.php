@@ -12,19 +12,25 @@ trait ApiControllerTrait{
 
     }
     private function parseInclude($include){
-        if( isset($include)){
+        if( !is_null($include) ){
             if($include instanceof Request){
                 $request = $include;
-                if($request->include){
-                    $this->fractal->parseIncludes($request->include);
+                if($request->has('include')){
+                    $this->fractal->parseIncludes($this->toSingular($request->input('include')));
                 }
             }else{
-
-                $this->fractal->parseIncludes($include);
+                $this->fractal->parseIncludes($this->toSingular($include));
             }
         }
     }
-
+    private function toSingular($include){
+        if (substr($include, -1) == 's') {
+            return substr_replace($include, "", -1);
+        }else{
+            return $include;
+        }
+        
+    }
         private function setOrGetRedis($key, $data){
 
         if(  Redis::exists($key) ){
@@ -41,35 +47,11 @@ trait ApiControllerTrait{
         return implode($arr, ".");
     }
    
-
-    private function createCollectionTranformer($include, $class){
-        $this->parseInclude($include);
-        $data = call_user_func(array($this->modelClass($class), 'all'));
-        return $this->transform($data, $this->tranformerClass($class));
-
-    }
-
-    private function createItemTranformer($include, $class, $name){
-
-        $this->parseInclude($include);
-        $utf = urldecode($name);
-        $data = call_user_func(array($this->modelClass($class), 'where'), ['name' => $utf])->first();
-        // null must show error
-        return $this->transformItem($data, $this->tranformerClass($class));
-
-    }
-
-
-
-    /**
-     * undocumented function
-     *
-     * @return void
-     */
     private function tranformerClass($name)
     {
+       
         $namespace = 'App\\Api\\Tranformer\\';
-        $class = $namespace . ucfirst($name) . "Tranformer";
+        $class = $namespace . $this->toSingular(ucfirst($name)) . "Tranformer";
         return new $class;
     }
 

@@ -35,6 +35,12 @@ class DivisionsController extends Controller
         return $this->sendResponse($this->createCollectionTranformer($request, 'Town'));
     }
 
+    private function createCollectionTranformer($include, $class){
+        $this->parseInclude($include);
+        $data = call_user_func(array($this->modelClass($class), 'all'));
+        return $this->transform($data, $this->tranformerClass($class));
+
+    }
     // Ward
     // Viallage Tracts
     // Village

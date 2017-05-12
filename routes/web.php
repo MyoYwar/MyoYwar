@@ -20,15 +20,17 @@ $app->get('/', function () use ($app) {
 
 $app->get('/api/states', "DivisionsController@states");
 $app->get('/api/districts', "DivisionsController@districts");
-$app->get('/api/townships', "DivisionsControllertownships");
+$app->get('/api/townships', "DivisionsController@townships");
 $app->get('/api/towns', "DivisionsController@towns");
 //$app->get('/api/villagetracts', "ApiController@districts");
 //
 
 $app->get('/api/states/{name}' , "DivisionController@state");
+$app->get('/api/districts/{name}' , "DivisionController@district");
+$app->get('/api/townships/{name}' , "DivisionController@township");
 $app->get('/api/towns/{name}' , "DivisionControllerr@town");
 
 // 
-$app->get('/api/states/{name}/districts', "HierarchicalDivisionController@districts");
-$app->get('/api/districts/{name}/townships', "HierarchicalDivisionController@townships");
-$app->get('/api/townships/{name}/towns', "HierarchicalDivisionController@towns");
+$app->get('/api/states/{name}/{division}', "HierarchicalDivisionController@districts");
+$app->get('/api/districts/{name}/{division}', "HierarchicalDivisionController@townships");
+$app->get('/api/townships/{name}/{division}', "HierarchicalDivisionController@towns");

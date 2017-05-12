@@ -6,7 +6,7 @@ use App\PlaceCode;
 use Illuminate\Database\Eloquent\Model;
 
 class District Extends Model{
-
+    use PlaceCode;
     public $incrementing = false;
 
     public function state(){
