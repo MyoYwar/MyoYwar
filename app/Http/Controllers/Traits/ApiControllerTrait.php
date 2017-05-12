@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\Traits;
 use Illuminate\Support\Facades\Redis;
+use Illuminate\Http\Request;
 
 trait ApiControllerTrait{
 
@@ -10,13 +11,21 @@ trait ApiControllerTrait{
             ->header('Content-Type', 'json');
 
     }
-    private function parseInclude($request){
-        if($request->has("include")){
-            $this->fractal->parseIncludes($request->include);
+    private function parseInclude($include){
+        if( isset($include)){
+            if($include instanceof Request){
+                $request = $include;
+                if($request->include){
+                    $this->fractal->parseIncludes($request->include);
+                }
+            }else{
+
+                $this->fractal->parseIncludes($include);
+            }
         }
     }
 
-    private function setOrGetRedis($key, $data){
+        private function setOrGetRedis($key, $data){
 
         if(  Redis::exists($key) ){
             $data = Redis::get($key);
@@ -33,18 +42,19 @@ trait ApiControllerTrait{
     }
    
 
-    private function createCollectionTranformer($request, $class){
-        $this->parseInclude($request);
+    private function createCollectionTranformer($include, $class){
+        $this->parseInclude($include);
         $data = call_user_func(array($this->modelClass($class), 'all'));
         return $this->transform($data, $this->tranformerClass($class));
 
     }
 
-    private function createItemTranformer($request, $class, $name){
+    private function createItemTranformer($include, $class, $name){
 
-        $this->parseInclude($request);
+        $this->parseInclude($include);
         $utf = urldecode($name);
         $data = call_user_func(array($this->modelClass($class), 'where'), ['name' => $utf])->first();
+        // null must show error
         return $this->transformItem($data, $this->tranformerClass($class));
 
     }

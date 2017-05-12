@@ -18,12 +18,17 @@ $app->get('/', function () use ($app) {
 
 //$app->get('/test', "ApiController@states");
 
-$app->get('/api/states', "ApiController@states");
-$app->get('/api/districts', "ApiController@districts");
-$app->get('/api/townships', "ApiController@townships");
-$app->get('/api/towns', "ApiController@towns");
+$app->get('/api/states', "DivisionsController@states");
+$app->get('/api/districts', "DivisionsController@districts");
+$app->get('/api/townships', "DivisionsControllertownships");
+$app->get('/api/towns', "DivisionsController@towns");
 //$app->get('/api/villagetracts', "ApiController@districts");
 //
 
-$app->get('/api/states/{name}' , "ApiController@state");
-$app->get('/api/towns/{name}' , "ApiController@town");
+$app->get('/api/states/{name}' , "DivisionController@state");
+$app->get('/api/towns/{name}' , "DivisionControllerr@town");
+
+// 
+$app->get('/api/states/{name}/districts', "HierarchicalDivisionController@districts");
+$app->get('/api/districts/{name}/townships', "HierarchicalDivisionController@townships");
+$app->get('/api/townships/{name}/towns', "HierarchicalDivisionController@towns");
