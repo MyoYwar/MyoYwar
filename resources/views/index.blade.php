@@ -39,17 +39,17 @@
                                 <pre> <br/> http://139.59.115.169/api/states
                                 </pre>
 
-                                <p> To get all places in the divison with all places in the child division <p>
-                                <pre> <br/> http://139.59.115.169/api/states?include=town
+                                <p> To get all places in the divison including all places in the sub division <p>
+                                <pre> <br/> http://139.59.115.169/api/states?include=towns
                                 </pre>
 
-                                <p> To get certain place in the divison with all places in the child division (hierarchically) <p>
+                                <p> To get certain place in the divison with all places in the sub division <p>
                                 <pre> <br/> http://139.59.115.169/api/states/Yangon/districts
                                 </pre>
                                 </p>
 
-                                <p> To get certain place in the divison with all places in the sub child division (doesn't have to be hierachical) <p>
-                                <pre> <br/> http://139.59.115.169/api/states/Yangon?include=town
+                                <p> To get certain place in the divison including all places in the sub child division <p>
+                                <pre> <br/> http://139.59.115.169/api/states/Yangon?include=towns
                                 </pre>
                                 </p>
                                 </div>
