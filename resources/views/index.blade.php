@@ -55,17 +55,20 @@
                                 </div>
                             </div>
                             </div>
-                            <a class="github-button" href="https://github.com/leexikang/MyoYwar/subscription" data-icon="octicon-eye" data-size="large" aria-label="Watch leexikang/MyoYwar on GitHub">Watch</a>
-                            <a class="github-button" href="https://github.com/leexikang/MyoYwar/fork" data-icon="octicon-repo-forked" data-size="large" aria-label="Fork leexikang/MyoYwar on GitHub">Fork</a>
-                                                    </div>
-                    </div>
+                            <hr/>
+                            <a href="https://github.com/leexikang/MyoYwar" style="color: #24292E">
+
+                                <i class="fa fa-github fa-3x" aria-hidden="true"></i>
+                            </a>
+                     </div>
+        </div>
                     <br/>
                     <br/>
                 </body>
-                <script async defer src="https://buttons.github.io/buttons.js"></script>
                 <script src="https://unpkg.com/vue"> </script>
                 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
                 <script src="https://cdn.jsdelivr.net/lodash/4.17.4/lodash.min.js"></script>
+                <script src="https://use.fontawesome.com/63255c320c.js"></script>
                 <script>
                    var app = new Vue({
                        el: "#app",
