@@ -37,7 +37,8 @@ class HierarchicalDivisionController extends Controller
     }
 
     public function getTranformer($name, $divison, $class){
-        $model = call_user_func([$this->modelClass($class), 'where'], 'name', $name)->first();
+        
+        $model = call_user_func([$this->modelClass($class), 'where'], 'name', urldecode($name))->first();
         $data = call_user_func([$model, $divison])->get();
         return $this->transform($data, $this->tranformerClass($divison));
 
