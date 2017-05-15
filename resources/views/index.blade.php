@@ -74,20 +74,24 @@
                        el: "#app",
                        data: {
                            places: {},
-                           townships: {},
+                           towns: {},
                            selected: "",
+                           selectedTwo: "",
 
                        },
                        methods: {
                            getChild: function(){
                                places = this.places;
                                user = _.findKey(places, { 'id': this.selected });
-                               this.townships = places[user].township.data;
+                               this.towns = places[user].town.data;
+                           },
+                           fetchChild: function(data){
+                            console.log(this.selectedTwo);
                            }
                        },
                        mounted: function(){
                            data = "";
-                           axios.get('api/states?include=township')
+                           axios.get('api/states?include=towns')
 
                            .then(function(response){
 
