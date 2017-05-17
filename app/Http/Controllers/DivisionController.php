@@ -22,13 +22,14 @@ class DivisionController extends Controller
         $this->loadFractal();
     }
 
-    public function state(Request $request, $name){
+    public function state(Request $request, $id){
 
-        $data = $this->setOrGetRedis(
-            $this->generateCacheKey([$name, $request->input('include')]),
-            $this->createItemTranformer($request, 'State', $name)
-        );
-
+/*        $data = $this->setOrGetRedis(*/
+            //$this->generateCacheKey([$name, $request->input('include')]),
+            //$this->createItemTranformer($request, 'State', $name)
+        //);
+        $data = $this->createItemTranformer(new \App\State, $id, $request);
+        return $data;
         return $this->sendResponse($data);
     }
 
@@ -48,13 +49,10 @@ class DivisionController extends Controller
     // Viallage Tracts
     // Village
    
-    private function createItemTranformer($include, $class, $name){
+    private function createItemTranformer($model, $id, $request){
 
-        $this->parseInclude($include);
-        $utf = urldecode($name);
-        $data = call_user_func(array($this->modelClass($class), 'where'), ['name' => $utf])->first();
-        // null must show error
-        return $this->transformItem($data, $this->tranformerClass($class));
+        $this->parseInclude($request);
+        return $this->transformItem($model->find($id), $this->tranformerClass($class));
 
     }
 

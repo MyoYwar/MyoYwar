@@ -47,7 +47,7 @@ trait ApiControllerTrait{
         return implode($arr, ".");
     }
    
-    private function tranformerClass($name)
+    private function transformerClass($name)
     {
        
         $namespace = 'App\\Api\\Tranformer\\';
