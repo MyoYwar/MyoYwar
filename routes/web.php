@@ -18,21 +18,31 @@ $app->get('/', function () use ($app) {
 
 //$app->getgroup('/test', "ApiController@states");
 $app->group(['prefix' => 'api'], function () use ($app) {
-    $app->get('states', "StatesController@states");
-    $app->get("states/{id}" , "StatesController@state");
-    $app->get("states/{id}/{division}", "StatesController@divisions");
+    // states
+    $app->get('states', "StatesController@divisions");
+    $app->get("states/{id}" , "StatesController@division");
+    $app->get("states/{id}/{division}", "StatesController@subDivisions");
+
+    // Districts
+    $app->get('districts', "DistrictsController@divisions");
+    $app->get("districts/{id}" , "DistrictsController@division");
+    $app->get("districts/{id}/{division}", "DistrictsController@subDivisions");
+
+    // Townships
+    $app->get("townships", "TownshipsController@divisions");
+    $app->get("townships/{id}" , "TownshipsController@division");
+    $app->get("townships/{id}/{division}", "TownshipsController@subDivisions");
+
+    // Towns
+
+    $app->get("towns", "TownsController@divisions");
+    $app->get("towns/{id}" , "TownsController@division");
+    $app->get("towns/{id}/{division}", "TownsController@subDivisions");
+
+
+
+
+
+
 });
 
-$app->get('/api/districts', "DivisionsController@districts");
-$app->get('/api/townships', "DivisionsController@townships");
-$app->get('/api/towns', "DivisionsController@towns");
-//$app->get('/api/villagetracts', "ApiController@districts");
-//
-
-$app->get('/api/districts/{id}' , "DivisionController@district");
-$app->get('/api/townships/{id}' , "DivisionController@township");
-$app->get('/api/towns/{id}' , "DivisionControllerr@town");
-
-// 
-//$app->get('/api/districts/{name}/{division}', "HierarchicalDivisionController@townships");
-//$app->get('/api/townships/{name}/{division}', "HierarchicalDivisionController@towns");

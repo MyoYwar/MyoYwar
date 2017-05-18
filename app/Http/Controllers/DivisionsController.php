@@ -2,49 +2,50 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Traits\ApiControllerTrait;
+use Illuminate\Database\Eloquent\Model;
+use League\Fractal\TransformerAbstract;
 use Min\FractalCommands\Traits\Fractal;
-use App\Api\Tranformer\StateTranformer;
+use App\Http\Controllers\Traits\ApiTrait;
 
 class DivisionsController extends Controller
 {
-    use Fractal, ApiControllerTrait;
+    use Fractal,  ApiTrait;
 
-   public function __construct()
+    public $model;
+    public $transformer;
+
+    public function __construct(Model $model, TransformerAbstract $transformer)
     {
+        $this->model = $model;
+
+        $this->transformer = $transformer;
+
         $this->loadFractal();
     }
 
-    public function states(Request $request){
+    public function divisions(Request $request){
 
-        $data = $this->setOrGetRedis(
-            $this->generateCacheKey( ['states', $request->input('include')]), 
-            $this->createCollectionTranformer($request, 'State')
-        );
-        return $this->sendResponse($data);
-    }
+        $data = $this->getBy($request);
 
-    public function districts(Request $request){
-        return $this->sendResponse($this->createCollectionTranformer($request, 'District'));
-    }
+        if($get = $request->input('get')){
+            return $this->sendChildDivisions($get, $data);
+        }
 
-    public function Townships(Request $request){
-        return $this->sendResponse($this->createCollectionTranformer($request, 'Township'));
-    }
-
-    public function Towns(Request $request){
-        return $this->sendResponse($this->createCollectionTranformer($request, 'Town'));
-    }
-
-    private function createCollectionTranformer($include, $class){
-        $this->parseInclude($include);
-        $data = call_user_func(array($this->modelClass($class), 'all'));
-        return $this->transform($data, $this->tranformerClass($class));
+        $this->parseInclude($request);
+        return $this->sendResponse($this->transform($data,$this->transformer));
 
     }
-    // Ward
-    // Viallage Tracts
-    // Village
-   
 
-   }
+    public function division(Request $request, $id){
+        $data = $this->model->find($id);
+        $this->parseInclude($request);
+        return $this->transformItem($data, $this->transformer);
+    }
+
+    public function subDivisions(Request $request, $id, $division){
+        $data = $this->model->find($id)->$division()->get();
+        return $this->transform($data,$this->transformerClass($division)); 
+    }
+
+
+}

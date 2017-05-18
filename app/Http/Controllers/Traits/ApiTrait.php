@@ -3,7 +3,7 @@ namespace App\Http\Controllers\Traits;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Http\Request;
 
-trait ApiControllerTrait{
+trait ApiTrait{
 
     private function sendResponse($content){
 
@@ -11,6 +11,7 @@ trait ApiControllerTrait{
             ->header('Content-Type', 'json');
 
     }
+
     private function parseInclude($include){
         if( !is_null($include) ){
             if($include instanceof Request){
@@ -59,5 +60,26 @@ trait ApiControllerTrait{
         $class = 'App\\' . ucfirst($name);
         return new $class;
     }
+
+    private function getBy($request){
+
+        if($id = $request->input('id')){
+            return $this->model->where('id', $id)->get();
+        }
+        if($name = $request->input('name')){
+            return $this->model->where('name', $name)
+                ->get();
+        }
+        return $this->model->all();
+
+    }
+
+    private function sendChildDivisions($func, $data){
+
+        $data  = $data->first()->$func()->get();
+
+        return $this->sendResponse($this->transform($data,$this->transformerClass($func)));
+    }
+
 
 }
