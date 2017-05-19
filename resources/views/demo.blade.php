@@ -38,7 +38,8 @@
 		<p class="control">
 			<span class="select">
 				<select>
-					<option>
+					<option v-for="town in townTwo" :value="town" >
+					@{{ town.zh }}
 					</option>
 				</select>
 			</span>

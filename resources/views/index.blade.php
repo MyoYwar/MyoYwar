@@ -35,24 +35,145 @@
                                 <p> Supported divisions are states, districts,
                                  townships, towns and wards ( listed hierarchically).
 
-                                <p> To get all the places in the divison <p>
-                                <pre> <br/> http://139.59.115.169/api/states
+                                <p> To get all the places in the divison </p>
+                                <pre> <br/> http://139.59.115.169/api/{division}?name=name-of-divison|id=id-of-division&include=division|get=division
+                                </pre>
+                                <br/> <br/>
+                                <table class="table">
+                                    <tbody>
+
+                                     <tr> 
+                                     <td> <small> division </small> </td> 
+                                     <td> <small> string </small>  </td>
+                                     <td> <small> division you want to get </small></td>
+                                     <td> states </td>
+                                     <td> <small> required</small></td>
+                                     </tr>
+
+                                     <tr> 
+                                         <td> <small> name </small> </td> 
+                                         <td> <small> string </small>  </td>
+                                         <td> <small> name of the division you want to get </small></td>
+                                         <td> Yangon </td>
+                                         <td> <small> Optional |   </small></td>
+                                     </tr>
+
+                                     <tr> 
+                                         <td> <small> id</small> </td> 
+                                         <td> <small> string </small>  </td>
+                                         <td> <small> id of the division you want to get </small></td>
+                                         <td> MMR002 (state_id) </td>
+                                         <td> <small> Optional </small></td>
+                                     </tr>
+
+                                     <tr> 
+                                         <td> <small> include</small> </td> 
+                                         <td> <small> string </small>  </td>
+                                         <td> <small> nested the sub division within the parent division</small></td>
+                                         <td> towns </td>
+                                         <td> <small> Optional </small></td>
+                                     </tr>
+
+                                     <tr> 
+                                         <td> <small> get </small> </td> 
+                                         <td> <small> string </small>  </td>
+                                         <td> <small> get Only the sub divisions </small></td>
+                                         <td> towns </td>
+                                         <td> <small> Optional </small></td>
+                                     </tr>
+
+
+                               </tbody>
+                                 </table>
+
+                               <h5> Example Call </h5>
+                               <p> To include subdivsion </p>
+                                <pre><br/>http://139.59.115.169/api/states<br/> http://139.59.115.169/api/states?id=MMR010?include=towns <br/>http://139.59.115.169/api/states?name=mandalay?get=towns
                                 </pre>
 
-                                <p> To get all places in the divison including all places in the sub division <p>
-                                <pre> <br/> http://139.59.115.169/api/states?include=towns
+                               <p> To include subdivsion </p>
+                                <pre> <br/> http://139.59.115.169/api/{division}/{id}
                                 </pre>
+                                <br/> <br/>
+                                <table class="table">
+                                <tr> 
+                                     <td> <small> division </small> </td> 
+                                     <td> <small> string </small>  </td>
+                                     <td> <small> division you want to get </small></td>
+                                     <td> states</td>
+                                     <td> <small> required</small></td>
+                                     </tr>
 
-                                <p> To get certain place in the divison with all places in the sub division <p>
-                                <pre> <br/> http://139.59.115.169/api/states/Yangon/districts
+                                     <tr> 
+                                         <td> <small> id</small> </td> 
+                                         <td> <small> string </small>  </td>
+                                         <td> <small> id of the division you want to get </small></td>
+                                         <td> MMR002 (state_id) </td>
+                                         <td> <small>  required </small></td>
+                                     </tr>
+
+                                     <tr> 
+                                       <td> <small> include</small> </td> 
+                                       <td> <small> string </small>  </td>
+                                       <td> <small> nested the sub division within the parent division (doesn't need to be hierarchical)</small></td>
+                                       <td> towns </td>
+                                       <td> <small> Optional </small></td>
+                                   </tr>
+
+                                   <tr> 
+                                       <td> <small> get </small> </td> 
+                                       <td> <small> string </small>  </td>
+                                       <td> <small> get Only the sub divisions (doesn't need to be hierarchical) </small></td>
+                                       <td> towns </td>
+                                       <td> <small> Optional </small></td>
+                                   </tr>
+
+
+                               </table>
+
+                               <h5> Example Call </h5>
+                               <pre><br/>http://139.59.115.169/api/states/"MMR010?include=towns
+                                </pre>
+                                <br/><br/>
+
+                               <p> To get certain place in the divison with all places in the sub division. Id is the only support<p>
+                                <pre> <br/> http://139.59.115.169/api/{division}/{id}/{sub-division}
                                 </pre>
                                 </p>
 
-                                <p> To get certain place in the divison including all places in the sub child division <p>
-                                <pre> <br/> http://139.59.115.169/api/states/Yangon?include=towns
+                                <br/> <br/>
+                                <table class="table">
+                                <tr> 
+                                     <td> <small> division </small> </td> 
+                                     <td> <small> string </small>  </td>
+                                     <td> <small> division you want to get </small></td>
+                                     <td> <small> required</small></td>
+                                     </tr>
+
+                                     <tr> 
+                                         <td> <small> id</small> </td> 
+                                         <td> <small> string </small>  </td>
+                                         <td> <small> id of the division you want to get </small></td>
+                                         <td> <small> required </small></td>
+                                     </tr>
+
+                                     <tr> 
+                                         <td> <small> sub division</small> </td> 
+                                         <td> <small> string </small>  </td>
+                                         <td> <small> the childs of the divsion (doesn't need to be hierarchical)</small></td>
+                                         <td> <small> required </small></td>
+                                     </tr>
+
+                                 </table>
+
+                               <h5> Example Call </h5>
+
+                               <pre><br/>http://139.59.115.169/api/states/MMR010/towns
                                 </pre>
-                                </p>
-                                </div>
+
+
+
+                              </div>
                             </div>
                             </div>
                             <hr/>
@@ -77,16 +198,22 @@
                            towns: {},
                            selected: "",
                            selectedTwo: "",
+                           townTwo: ""
 
                        },
+
                        methods: {
                            getChild: function(){
                                places = this.places;
                                user = _.findKey(places, { 'id': this.selected });
                                this.towns = places[user].town.data;
-                           },
-                           fetchChild: function(data){
-                            console.log(this.selectedTwo);
+                           }, fetchChild: function(data){
+                            axios.get('api/states/' + this.selectedTwo + '/towns')
+                            .then(function(response){
+                                this.app.$nextTick(function(){
+                                    this.townTwo = response.data.data
+                                })
+                            })
                            }
                        },
                        mounted: function(){
